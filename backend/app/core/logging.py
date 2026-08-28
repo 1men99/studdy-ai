@@ -17,18 +17,29 @@ class StructuredJsonFormatter(logging.Formatter):
             "message": record.getMessage(),
         }
 
-        if hasattr(record, "request_id"):
-            log_entry["request_id"] = record.request_id
-        if hasattr(record, "user_id_hash"):
-            log_entry["user_id_hash"] = record.user_id_hash
-        if hasattr(record, "duration_ms"):
-            log_entry["duration_ms"] = record.duration_ms
-        if hasattr(record, "status_code"):
-            log_entry["status_code"] = record.status_code
-        if hasattr(record, "endpoint"):
-            log_entry["endpoint"] = record.endpoint
-        if hasattr(record, "ai_status"):
-            log_entry["ai_status"] = record.ai_status
+        request_id = getattr(record, "request_id", None)
+        if request_id is not None:
+            log_entry["request_id"] = request_id
+
+        user_id_hash = getattr(record, "user_id_hash", None)
+        if user_id_hash is not None:
+            log_entry["user_id_hash"] = user_id_hash
+
+        duration_ms = getattr(record, "duration_ms", None)
+        if duration_ms is not None:
+            log_entry["duration_ms"] = duration_ms
+
+        status_code = getattr(record, "status_code", None)
+        if status_code is not None:
+            log_entry["status_code"] = status_code
+
+        endpoint = getattr(record, "endpoint", None)
+        if endpoint is not None:
+            log_entry["endpoint"] = endpoint
+
+        ai_status = getattr(record, "ai_status", None)
+        if ai_status is not None:
+            log_entry["ai_status"] = ai_status
         if record.exc_info:
             log_entry["exception"] = self.formatException(record.exc_info)
 

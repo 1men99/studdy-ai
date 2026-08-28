@@ -1,6 +1,6 @@
 import logging
-from typing import Any, Optional
-from fastapi import FastAPI, HTTPException, Request, status
+from typing import Any, Mapping, Optional
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from slowapi.errors import RateLimitExceeded
@@ -24,10 +24,10 @@ def build_error_response(
     status_code: int,
     message: Optional[str] = None,
     detail: Any = None,
-    headers: Optional[dict[str, str]] = None,
+    headers: Optional[dict[str, str] | Mapping[str, str]] = None,
 ) -> JSONResponse:
     default_msg = STATUS_CODE_MESSAGES.get(status_code, "An unexpected error occurred.")
-    final_message = message or (str(detail) if isinstance(detail, str) and detail else default_msg)
+    final_message = message or (detail if isinstance(detail, str) and detail else default_msg)
 
     payload = {
         "status": "error",
@@ -48,6 +48,7 @@ async def http_exception_handler(request: Request, exc: HTTPException) -> JSONRe
         "http_exception",
         extra={
             "status_code": exc.status_code,
+            # pyrefly: ignore [unnecessary-type-conversion]
             "detail": str(exc.detail),
             "path": request.url.path,
         },
@@ -101,16 +102,19 @@ async def rate_limit_exceeded_handler(
         "rate_limit_exceeded",
         extra={
             "path": request.url.path,
+            # pyrefly: ignore [unnecessary-type-conversion]
             "detail": str(exc.detail),
         },
     )
     headers = {}
-    if hasattr(exc, "retry_after") and exc.retry_after is not None:
-        headers["Retry-After"] = str(exc.retry_after)
+    retry_after = getattr(exc, "retry_after", None)
+    if retry_after is not None:
+        headers["Retry-After"] = str(retry_after)
 
     return build_error_response(
         status_code=429,
         message="Too many requests. Please try again shortly.",
+        # pyrefly: ignore [unnecessary-type-conversion]
         detail=str(exc.detail) if exc.detail else "Rate limit exceeded: 30 requests per minute.",
         headers=headers,
     )
@@ -131,7 +135,10 @@ async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONR
 
 
 def register_exception_handlers(app: FastAPI) -> None:
-    app.add_exception_handler(HTTPException, http_exception_handler)
-    app.add_exception_handler(RequestValidationError, validation_exception_handler)
-    app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
+    # pyrefly: ignore [bad-argument-type]
+    app.add_exception_handler(HTTPException, http_exception_handler)  # pyright: ignore[reportArgumentType]
+    # pyrefly: ignore [bad-argument-type]
+    app.add_exception_handler(RequestValidationError, validation_exception_handler)  # pyright: ignore[reportArgumentType]
+    # pyrefly: ignore [bad-argument-type]
+    app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)  # pyright: ignore[reportArgumentType]
     app.add_exception_handler(Exception, unhandled_exception_handler)

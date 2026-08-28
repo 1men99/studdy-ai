@@ -2,6 +2,7 @@ from typing import Any
 
 import httpx
 import jwt
+from jwt.algorithms import RSAAlgorithm
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from app.core.config import settings
@@ -18,16 +19,17 @@ async def _get_signing_key(token: str, *, allow_refresh: bool = True) -> Any:
     if not key_id or not settings.CLERK_ISSUER:
         raise jwt.InvalidTokenError("Missing Clerk issuer or key ID")
 
-    if _jwks_cache is None:
+    if _jwks_cache is None or not isinstance(_jwks_cache, dict):
         jwks_url = f"{settings.CLERK_ISSUER.rstrip('/')}/.well-known/jwks.json"
         async with httpx.AsyncClient() as client:
             response = await client.get(jwks_url, timeout=5)
         response.raise_for_status()
         _jwks_cache = response.json()
 
-    for key in _jwks_cache.get("keys", []):
-        if key.get("kid") == key_id:
-            return jwt.algorithms.RSAAlgorithm.from_jwk(key)
+    if isinstance(_jwks_cache, dict):
+        for key in _jwks_cache.get("keys", []):
+            if key.get("kid") == key_id:
+                return RSAAlgorithm.from_jwk(key)
 
     # Refresh once when Clerk rotates keys.
     if allow_refresh:

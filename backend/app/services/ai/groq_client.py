@@ -32,7 +32,8 @@ class GroqClient:
                 timeout=60,
             )
 
-        response = await self._client.post(
+        client = self._client
+        response = await client.post(
             "/chat/completions",
             json={
                 "model": settings.GROQ_MODEL,
