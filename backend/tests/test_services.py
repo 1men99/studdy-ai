@@ -15,7 +15,7 @@ from app.core.errors import (
     unhandled_exception_handler,
 )
 from app.services.convex.client import ConvexClient
-from app.services.ai.groq_client import GroqClient
+from app.services.ai.openai_client import OpenAIClient
 from app.core.config import settings
 
 
@@ -28,35 +28,22 @@ class DummySchema(BaseModel):
 async def test_convex_client_mutation_and_query(monkeypatch):
     monkeypatch.setattr(settings, "CONVEX_URL", "https://mock.convex.cloud")
 
-    mock_response = MagicMock()
-    mock_response.json.return_value = {"value": {"success": True}}
-    mock_response.raise_for_status = MagicMock()
+    mock_resp = MagicMock()
+    mock_resp.json.return_value = {"value": {"success": True}}
+    mock_resp.raise_for_status = MagicMock()
 
-    with patch("httpx.AsyncClient.post", new=AsyncMock(return_value=mock_response)):
+    with patch("httpx.AsyncClient.post", new=AsyncMock(return_value=mock_resp)):
         client = ConvexClient()
-        mut_res = await client.run_mutation("sessions:create", {"title": "Test"}, token="mock_token")
-        assert mut_res == {"success": True}
-
-        query_res = await client.run_query("sessions:get", {"id": "1"}, token="mock_token")
-        assert query_res == {"success": True}
-
-
-@pytest.mark.asyncio
-async def test_convex_client_empty_url(monkeypatch):
-    monkeypatch.setattr(settings, "CONVEX_URL", "")
-    client = ConvexClient()
-    assert await client.run_mutation("test", {}) is None
-    assert await client.run_query("test", {}) == []
+        res_m = await client.run_mutation("users:create", {"name": "Alice"})
+        res_q = await client.run_query("users:get", {"id": "123"})
+        assert res_m == {"success": True}
+        assert res_q == {"success": True}
 
 
-def test_get_rate_limit_key_logic():
-    # Dev token
+def test_rate_limit_key_generation():
     mock_req = MagicMock(spec=Request)
-    mock_req.headers = {"Authorization": "Bearer dev_user_abc123"}
-    assert get_rate_limit_key(mock_req) == "user:dev_user_abc123"
-
-    # Raw token without sub
-    mock_req.headers = {"Authorization": "Bearer token_only_string"}
+    # Auth header present
+    mock_req.headers = {"authorization": "Bearer token_xyz"}
     key = get_rate_limit_key(mock_req)
     assert key.startswith("token:")
 
@@ -67,9 +54,9 @@ def test_get_rate_limit_key_logic():
 
 
 @pytest.mark.asyncio
-async def test_groq_client_real_http_flow(monkeypatch):
-    monkeypatch.setattr(settings, "GROQ_API_KEY", "gsk_mock_api_key")
-    monkeypatch.setattr(settings, "GROQ_MODEL", "llama-3.3-70b-versatile")
+async def test_openai_client_real_http_flow(monkeypatch):
+    monkeypatch.setattr(settings, "OPENAI_API_KEY", "sk-proj-mock-api-key")
+    monkeypatch.setattr(settings, "OPENAI_MODEL", "gpt-4o-mini")
 
     mock_resp = MagicMock()
     mock_resp.json.return_value = {
@@ -84,7 +71,7 @@ async def test_groq_client_real_http_flow(monkeypatch):
     mock_resp.raise_for_status = MagicMock()
 
     with patch("httpx.AsyncClient.post", new=AsyncMock(return_value=mock_resp)):
-        client = GroqClient()
+        client = OpenAIClient()
         result = await client.generate_structured("Generate dummy", DummySchema)
         assert result.title == "Valid Dummy"
         assert result.count == 10

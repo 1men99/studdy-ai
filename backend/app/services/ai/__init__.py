@@ -1,1 +1,1 @@
-# AI Services (Groq Integration)
+# AI Services (OpenAI Integration)

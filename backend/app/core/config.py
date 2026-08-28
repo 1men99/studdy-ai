@@ -19,9 +19,9 @@ class Settings(BaseSettings):
     CLERK_SECRET_KEY: str = ""
     CLERK_ISSUER: str = ""
 
-    # Groq AI
-    GROQ_API_KEY: str = ""
-    GROQ_MODEL: str = "llama-3.3-70b-versatile"
+    # OpenAI AI
+    OPENAI_API_KEY: str = ""
+    OPENAI_MODEL: str = "gpt-4o-mini"
 
     # Convex Database
     CONVEX_URL: str = ""
@@ -48,7 +48,7 @@ class Settings(BaseSettings):
                 for name, value in {
                     "CLERK_SECRET_KEY": self.CLERK_SECRET_KEY,
                     "CLERK_ISSUER": self.CLERK_ISSUER,
-                    "GROQ_API_KEY": self.GROQ_API_KEY,
+                    "OPENAI_API_KEY": self.OPENAI_API_KEY,
                     "CONVEX_URL": self.CONVEX_URL,
                 }.items()
                 if not value
@@ -59,10 +59,10 @@ class Settings(BaseSettings):
                 )
         return self
 
-    def require_groq_key(self) -> str:
-        if not self.GROQ_API_KEY:
-            raise RuntimeError("GROQ_API_KEY is required to use Groq AI services")
-        return self.GROQ_API_KEY
+    def require_openai_key(self) -> str:
+        if not self.OPENAI_API_KEY:
+            raise RuntimeError("OPENAI_API_KEY is required to use OpenAI services")
+        return self.OPENAI_API_KEY
 
     @property
     def allowed_origins(self) -> list[str]:

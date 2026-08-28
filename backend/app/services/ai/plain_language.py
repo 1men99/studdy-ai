@@ -1,7 +1,7 @@
 # pyrefly: ignore [missing-import]
 from app.schemas.simplify import SimplificationResult, SimplifyTextRequest
 # pyrefly: ignore [missing-import]
-from app.services.ai.groq_client import GroqClient
+from app.services.ai.openai_client import OpenAIClient
 
 
 def build_simplification_prompt(request: SimplifyTextRequest) -> str:
@@ -16,8 +16,8 @@ SOURCE TEXT:
 
 
 async def simplify_text(
-    request: SimplifyTextRequest, client: GroqClient | None = None
+    request: SimplifyTextRequest, client: OpenAIClient | None = None
 ) -> SimplificationResult:
-    return await (client or GroqClient()).generate_structured(
+    return await (client or OpenAIClient()).generate_structured(
         build_simplification_prompt(request), SimplificationResult
     )

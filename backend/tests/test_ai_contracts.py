@@ -3,7 +3,7 @@ from pydantic import ValidationError
 
 from app.schemas.questions import GenerateQuestionsRequest, QuestionGenerationResult
 from app.schemas.simplify import SimplifyTextRequest
-from app.services.ai.groq_client import GroqClient
+from app.services.ai.openai_client import OpenAIClient
 from app.services.ai.question_generator import build_question_prompt
 
 
@@ -39,13 +39,13 @@ def test_question_prompt_is_grounded_and_requests_distribution():
 
 
 @pytest.mark.asyncio
-async def test_groq_client_retries_malformed_json():
+async def test_openai_client_retries_malformed_json():
     responses = iter(["not json", '{"questions": []}', "still not json"])
 
     async def fake_generate(_prompt: str, _schema: str) -> str:
         return next(responses)
 
     with pytest.raises(ValueError, match="invalid structured JSON"):
-        await GroqClient(generate_fn=fake_generate).generate_structured(
+        await OpenAIClient(generate_fn=fake_generate).generate_structured(
             "prompt", QuestionGenerationResult
         )

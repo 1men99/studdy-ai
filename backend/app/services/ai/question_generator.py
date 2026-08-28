@@ -1,5 +1,5 @@
 from app.schemas.questions import GenerateQuestionsRequest, QuestionGenerationResult
-from app.services.ai.groq_client import GroqClient
+from app.services.ai.openai_client import OpenAIClient
 
 
 def build_question_prompt(request: GenerateQuestionsRequest) -> str:
@@ -23,8 +23,8 @@ NOTES:
 
 
 async def generate_questions(
-    request: GenerateQuestionsRequest, client: GroqClient | None = None
+    request: GenerateQuestionsRequest, client: OpenAIClient | None = None
 ) -> QuestionGenerationResult:
-    return await (client or GroqClient()).generate_structured(
+    return await (client or OpenAIClient()).generate_structured(
         build_question_prompt(request), QuestionGenerationResult
     )
