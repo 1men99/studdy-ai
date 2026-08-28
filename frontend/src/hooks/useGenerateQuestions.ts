@@ -18,20 +18,33 @@ export function useGenerateQuestions() {
   return useMutation({
     mutationFn: async ({ notes, difficulty = 'medium' }: GenerateQuestionsInput) => {
       const token = auth ? await auth.getToken() : null
-      const response = await fetch(`${getApiBaseUrl()}/api/v1/questions/generate`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token || 'dev_user_local'}`,
-        },
-        body: JSON.stringify({ notes, difficulty, question_count: 10 }),
-      })
+      let response: Response
+      try {
+        response = await fetch(`${getApiBaseUrl()}/api/v1/questions/generate`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token || 'dev_user_local'}`,
+          },
+          body: JSON.stringify({ notes, difficulty, question_count: 10 }),
+        })
+      } catch (err: any) {
+        throw new Error(
+          `Network connection failed when reaching backend API (${getApiBaseUrl()}). Please verify that your backend service is running and VITE_API_BASE_URL is correct.`
+        )
+      }
+
       if (!response.ok) {
         const error = await response.json().catch(() => ({}))
-        const errorMessage = error.message || error.detail || 'Unable to generate practice questions. Please try again.'
+        const errorMessage = error.message || error.detail || `Server error (${response.status}). Please try again.`
         throw new Error(errorMessage)
       }
-      return (await response.json()) as QuestionGenerationResult
+
+      const data = await response.json().catch(() => null)
+      if (!data) {
+        throw new Error('Invalid response received from backend. Please verify your VITE_API_BASE_URL deployment setting.')
+      }
+      return data as QuestionGenerationResult
     },
     onSuccess: (result) => {
       queryClient.setQueryData(['generated-questions'], result)

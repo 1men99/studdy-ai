@@ -13,20 +13,33 @@ export function useSimplifyText() {
   return useMutation({
     mutationFn: async ({ text, text_type }: { text: string; text_type: TextClassification }) => {
       const token = auth ? await auth.getToken() : null
-      const response = await fetch(`${getApiBaseUrl()}/api/v1/simplify`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token || 'dev_user_local'}`,
-        },
-        body: JSON.stringify({ text, text_type }),
-      })
+      let response: Response
+      try {
+        response = await fetch(`${getApiBaseUrl()}/api/v1/simplify`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token || 'dev_user_local'}`,
+          },
+          body: JSON.stringify({ text, text_type }),
+        })
+      } catch (err: any) {
+        throw new Error(
+          `Network connection failed when reaching backend API (${getApiBaseUrl()}). Please verify that your backend service is running and VITE_API_BASE_URL is correct.`
+        )
+      }
+
       if (!response.ok) {
         const error = await response.json().catch(() => ({}))
-        const errorMessage = error.message || error.detail || 'Unable to simplify this text. Please try again.'
+        const errorMessage = error.message || error.detail || `Server error (${response.status}). Please try again.`
         throw new Error(errorMessage)
       }
-      return (await response.json()) as SimplifyResult
+
+      const data = await response.json().catch(() => null)
+      if (!data) {
+        throw new Error('Invalid response received from backend. Please verify your VITE_API_BASE_URL deployment setting.')
+      }
+      return data as SimplifyResult
     },
     onSuccess: (result) => {
       queryClient.setQueryData(['simplification'], result)
