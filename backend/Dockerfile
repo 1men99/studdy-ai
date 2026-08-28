@@ -20,6 +20,11 @@ FROM python:3.12-slim AS runner
 
 WORKDIR /app
 
+# Install system dependencies (curl for healthchecks)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt-get/lists/*
+
 # Create a non-root system user for security
 RUN groupadd -g 999 appgroup && \
     useradd -r -u 999 -g appgroup appuser
