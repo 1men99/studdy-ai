@@ -3,7 +3,7 @@ services:
     name: study-ai-backend
     env: docker
     dockerContext: ./backend
-    dockerfilePath: ./backend/Dockerfile
+    dockerfilePath: Dockerfile
     region: oregon
     plan: free
     healthCheckPath: /api/v1/health
