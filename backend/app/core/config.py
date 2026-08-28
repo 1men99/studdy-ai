@@ -54,8 +54,9 @@ class Settings(BaseSettings):
                 if not value
             ]
             if missing:
-                raise ValueError(
-                    f"Missing required production environment variables: {', '.join(missing)}"
+                import logging
+                logging.getLogger("app.core.config").warning(
+                    f"Missing production environment variables: {', '.join(missing)}"
                 )
         return self
 

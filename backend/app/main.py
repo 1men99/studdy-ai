@@ -32,17 +32,22 @@ register_exception_handlers(app)
 if settings.ALLOWED_ORIGINS:
     origins = settings.allowed_origins
     has_wildcard = "*" in origins or "http://*" in origins or "https://*" in origins
-    regex_patterns = [
-        origin.replace(".", r"\.").replace("*", r".*")
-        for origin in origins
-        if "*" in origin and origin != "*"
-    ]
-    origin_regex = f"^({'|'.join(regex_patterns)})$" if regex_patterns else None
-    exact_origins = [o for o in origins if "*" not in o]
+    if has_wildcard:
+        origin_regex = r"https?://.*"
+        exact_origins = []
+    else:
+        regex_patterns = [
+            origin.replace(".", r"\.").replace("*", r".*")
+            for origin in origins
+            if "*" in origin and origin != "*"
+        ]
+        regex_patterns.extend([r"https://.*\.vercel\.app", r"https://.*\.onrender\.com"])
+        origin_regex = f"^({'|'.join(regex_patterns)})$"
+        exact_origins = [o for o in origins if "*" not in o]
 
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"] if has_wildcard else exact_origins,
+        allow_origins=exact_origins,
         allow_origin_regex=origin_regex,
         allow_credentials=True,
         allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
