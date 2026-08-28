@@ -15,10 +15,10 @@ export function usePracticePersistence() {
   const user = authUser?.user
 
   // Convex mutations - called safely if Convex URL is configured
-  const syncProfile = HAS_CONVEX_URL && user ? useMutation(api.users.syncProfile) : null
-  const createSession = HAS_CONVEX_URL && user ? useMutation(api.sessions.create) : null
-  const addQuestion = HAS_CONVEX_URL && user ? useMutation(api.questions.add) : null
-  const recordAnswer = HAS_CONVEX_URL && user ? useMutation(api.questions.recordAnswer) : null
+  const syncProfile = HAS_CONVEX_URL ? useMutation(api.users.syncProfile) : null
+  const createSession = HAS_CONVEX_URL ? useMutation(api.sessions.create) : null
+  const addQuestion = HAS_CONVEX_URL ? useMutation(api.questions.add) : null
+  const recordAnswer = HAS_CONVEX_URL ? useMutation(api.questions.recordAnswer) : null
 
   async function persistQuestions(notes: string, questions: PracticeQuestion[]) {
     // 1. Always save to local storage (guarantees zero data loss in guest/offline mode)

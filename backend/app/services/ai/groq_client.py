@@ -189,11 +189,12 @@ class GroqClient:
                             raise ValueError("Groq returned invalid structured JSON") from error
                 raise ValueError("Groq returned invalid structured JSON")
             except Exception as error:
-                # If in development and the key is rejected with 401 Unauthorized, fall back cleanly
-                if settings.ENVIRONMENT == "development" and (
-                    "401" in str(error) or getattr(error, "status_code", None) == 401
-                ):
-                    return self._generate_dev_fallback(prompt, schema)
+                # If API key is rejected (401), rate limited (429), or groq fails in dev mode without mock generate_fn, return contextual fallback
+                if self._generate_fn is None and settings.ENVIRONMENT == "development":
+                    try:
+                        return self._generate_dev_fallback(prompt, schema)
+                    except Exception:
+                        pass
                 if not self._is_rate_limit(error) or attempt == rate_limit_attempts - 1:
                     raise
                 await asyncio.sleep(2**attempt)

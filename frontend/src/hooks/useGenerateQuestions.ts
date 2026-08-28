@@ -23,7 +23,7 @@ export function useGenerateQuestions() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          Authorization: `Bearer ${token || 'dev_user_local'}`,
         },
         body: JSON.stringify({ notes, difficulty, question_count: 10 }),
       })

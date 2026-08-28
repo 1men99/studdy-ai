@@ -11,10 +11,10 @@ export function useSimplificationPersistence() {
   const authUser = HAS_CLERK_KEY ? useUser() : null
   const user = authUser?.user
 
-  const syncProfile = HAS_CONVEX_URL && user ? useMutation(api.users.syncProfile) : null
-  const createSession = HAS_CONVEX_URL && user ? useMutation(api.sessions.create) : null
-  const createSimplification = HAS_CONVEX_URL && user ? useMutation(api.simplifications.create) : null
-  const addWatchOut = HAS_CONVEX_URL && user ? useMutation(api.simplifications.addWatchOut) : null
+  const syncProfile = HAS_CONVEX_URL ? useMutation(api.users.syncProfile) : null
+  const createSession = HAS_CONVEX_URL ? useMutation(api.sessions.create) : null
+  const createSimplification = HAS_CONVEX_URL ? useMutation(api.simplifications.create) : null
+  const addWatchOut = HAS_CONVEX_URL ? useMutation(api.simplifications.addWatchOut) : null
 
   async function persist(text: string, textType: TextClassification, result: SimplifyResult) {
     // 1. Unconditionally save locally

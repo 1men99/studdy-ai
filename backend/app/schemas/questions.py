@@ -35,7 +35,12 @@ class QuestionGenerationResult(BaseModel):
     questions: list[PracticeQuestion]
 
     @model_validator(mode="after")
-    def must_have_ten_questions(self):
-        if len(self.questions) != 10:
-            raise ValueError("Question generation must return exactly 10 questions")
+    def sanitize_questions(self):
+        if not self.questions or len(self.questions) != 10:
+            raise ValueError("Question generation result must contain exactly 10 questions")
+        for idx, q in enumerate(self.questions):
+            if not q.id:
+                q.id = f"q{idx + 1}"
+            if q.type == "true_false" and not q.options:
+                q.options = ["True", "False"]
         return self
