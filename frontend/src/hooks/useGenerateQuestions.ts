@@ -2,13 +2,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useAuth } from '@clerk/clerk-react'
 import { toast } from '@/hooks/useToast'
 import type { QuestionGenerationResult } from '@/types'
+import { getApiBaseUrl } from '@/lib/api'
 
 type GenerateQuestionsInput = {
   notes: string
   difficulty?: 'easy' | 'medium' | 'hard'
 }
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
 
 const HAS_CLERK_KEY = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY)
 
@@ -19,7 +18,7 @@ export function useGenerateQuestions() {
   return useMutation({
     mutationFn: async ({ notes, difficulty = 'medium' }: GenerateQuestionsInput) => {
       const token = auth ? await auth.getToken() : null
-      const response = await fetch(`${API_BASE_URL}/api/v1/questions/generate`, {
+      const response = await fetch(`${getApiBaseUrl()}/api/v1/questions/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

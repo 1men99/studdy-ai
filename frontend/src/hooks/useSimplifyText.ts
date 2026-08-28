@@ -2,8 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useAuth } from '@clerk/clerk-react'
 import { toast } from '@/hooks/useToast'
 import type { SimplifyResult, TextClassification } from '@/types'
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+import { getApiBaseUrl } from '@/lib/api'
 
 const HAS_CLERK_KEY = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY)
 
@@ -14,7 +13,7 @@ export function useSimplifyText() {
   return useMutation({
     mutationFn: async ({ text, text_type }: { text: string; text_type: TextClassification }) => {
       const token = auth ? await auth.getToken() : null
-      const response = await fetch(`${API_BASE_URL}/api/v1/simplify`, {
+      const response = await fetch(`${getApiBaseUrl()}/api/v1/simplify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
