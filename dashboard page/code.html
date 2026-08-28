@@ -1,0 +1,208 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Dashboard - Studdy AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#525657",
+                    "secondary-container": "#d0e1fb",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-primary-fixed": "#00174b",
+                    "outline-variant": "#c3c6d7",
+                    "on-error-container": "#93000a",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#54647a",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "inverse-surface": "#283044",
+                    "tertiary-fixed": "#e0e3e5",
+                    "on-tertiary-container": "#eff1f3",
+                    "surface-tint": "#0053db",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "tertiary-container": "#6b6e70",
+                    "on-background": "#131b2e",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "on-surface": "#131b2e",
+                    "surface": "#faf8ff",
+                    "surface-variant": "#dae2fd",
+                    "on-surface-variant": "#434655",
+                    "inverse-on-surface": "#eef0ff",
+                    "primary-container": "#2563eb",
+                    "surface-container": "#eaedff",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "secondary": "#505f76",
+                    "surface-container-low": "#f2f3ff",
+                    "outline": "#737686",
+                    "secondary-fixed": "#d3e4fe",
+                    "surface-bright": "#faf8ff",
+                    "on-tertiary-fixed": "#191c1e",
+                    "on-primary-container": "#eeefff",
+                    "primary-fixed": "#dbe1ff",
+                    "primary": "#004ac6",
+                    "inverse-primary": "#b4c5ff",
+                    "surface-container-high": "#e2e7ff",
+                    "surface-container-highest": "#dae2fd",
+                    "error": "#ba1a1a",
+                    "background": "#faf8ff",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#d2d9f4",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#0b1c30",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#003ea8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "1.25rem",
+                    "gutter": "1rem",
+                    "xs": "0.5rem",
+                    "sm": "1rem",
+                    "xl": "3rem",
+                    "unit": "4px",
+                    "md": "1.5rem",
+                    "lg": "2rem",
+                    "margin-desktop": "2.5rem"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface flex items-center justify-between px-margin-mobile py-sm z-40">
+<div class="flex items-center gap-3">
+<button class="text-primary hover:bg-surface-container-low transition-colors active:opacity-80 p-2 -ml-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Studdy AI</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest cursor-pointer active:opacity-80 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="A minimalist and modern corporate portrait avatar of a student, light mode aesthetic, clean and simple background, soft lighting, professional yet approachable demeanor, fitting for an academic setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhx5wZAE14aGaXiZmrRCacg29bIdmjB1w7Gpc9dj7oZRB5TGzoM4nz1lk3Vicf48kDBm8wMKf7hqFhuIUPTTtTjxjA8bOWZy4lWZ4LTwT6sTR3o4XJtcEzNpgE1-LDOB2fgVlxFP1YKJkkNKDxPzRjiqq03mwq1ogYhGseAySWc8zneUpLS1qj1c4HmIG1L-QLpL_2391-XozmM1hnelo5LV8gHRAXqLQM305WBYyvb_xQf9jmAWG2">
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="px-margin-mobile pt-sm pb-xl max-w-md mx-auto md:max-w-4xl md:px-margin-desktop md:pt-md">
+<!-- Greeting -->
+<section class="mb-8">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-1">Good morning, Student</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">What would you like to focus on today?</p>
+</section>
+<!-- Tools Grid -->
+<section class="flex flex-col gap-6 md:flex-row md:gap-gutter mb-xl">
+<!-- Card 1: Practice Questions -->
+<div class="bg-surface-container-lowest p-6 rounded-[16px] shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-low flex flex-col hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-shadow duration-300 w-full flex-1 group">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">quiz</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Practice Questions</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">Turn your class notes into practice questions.</p>
+<button class="w-full h-[48px] bg-primary text-on-primary rounded-full font-label-md text-label-md flex items-center justify-center hover:bg-on-primary-fixed-variant active:scale-[0.98] transition-all">
+                    Create Questions
+                </button>
+</div>
+<!-- Card 2: Plain Language -->
+<div class="bg-surface-container-lowest p-6 rounded-[16px] shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-low flex flex-col hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-shadow duration-300 w-full flex-1 group">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">auto_stories</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Plain Language</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">Make difficult paragraphs, bills, or contracts easier to understand.</p>
+<button class="w-full h-[48px] bg-surface-container-low border border-outline-variant text-on-surface rounded-full font-label-md text-label-md flex items-center justify-center hover:bg-surface-container-high active:scale-[0.98] transition-all">
+                    Simplify Text
+                </button>
+</div>
+</section>
+<!-- Recent Activity -->
+<section>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Recent Activity</h3>
+<div class="bg-surface-container-lowest rounded-[16px] shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-surface-container-low p-2">
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container-low rounded-xl transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">biotech</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-on-surface">Biology Notes</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">Last practice • 2h ago</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<div class="w-full h-[1px] bg-surface-container-high mx-4 w-[calc(100%-2rem)]"></div>
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container-low rounded-xl transition-colors cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-on-surface">History Chapter 4 Summary</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">Simplified • Yesterday</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-xs bg-surface shadow-[0px_-4px_20px_rgba(0,0,0,0.04)] z-50 md:hidden">
+<!-- Active: Home -->
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-4 py-2 active:scale-95 transition-transform duration-150 w-16">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</button>
+<!-- Inactive: Practice -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:text-primary active:scale-95 transition-transform duration-150 w-16">
+<span class="material-symbols-outlined">quiz</span>
+<span class="font-label-sm text-label-sm mt-1">Practice</span>
+</button>
+<!-- Inactive: Simplify -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:text-primary active:scale-95 transition-transform duration-150 w-16">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-sm text-label-sm mt-1">Simplify</span>
+</button>
+<!-- Inactive: Profile -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-2 hover:text-primary active:scale-95 transition-transform duration-150 w-16">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</button>
+</nav>
+
+
+
+
+</body></html>

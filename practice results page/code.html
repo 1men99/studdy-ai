@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Practice Results - Studdy AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#525657",
+                        "secondary-container": "#d0e1fb",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-primary-fixed": "#00174b",
+                        "outline-variant": "#c3c6d7",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#54647a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "inverse-surface": "#283044",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-tertiary-container": "#eff1f3",
+                        "surface-tint": "#0053db",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "tertiary-container": "#6b6e70",
+                        "on-background": "#131b2e",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-surface": "#131b2e",
+                        "surface": "#faf8ff",
+                        "surface-variant": "#dae2fd",
+                        "on-surface-variant": "#434655",
+                        "inverse-on-surface": "#eef0ff",
+                        "primary-container": "#2563eb",
+                        "surface-container": "#eaedff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "secondary": "#505f76",
+                        "surface-container-low": "#f2f3ff",
+                        "outline": "#737686",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-primary-container": "#eeefff",
+                        "primary-fixed": "#dbe1ff",
+                        "primary": "#004ac6",
+                        "inverse-primary": "#b4c5ff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container-highest": "#dae2fd",
+                        "error": "#ba1a1a",
+                        "background": "#faf8ff",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d2d9f4",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#003ea8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "1.25rem",
+                        "gutter": "1rem",
+                        "xs": "0.5rem",
+                        "sm": "1rem",
+                        "xl": "3rem",
+                        "unit": "4px",
+                        "md": "1.5rem",
+                        "lg": "2rem",
+                        "margin-desktop": "2.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .loading-pulse {
+            animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(37, 99, 235, 1); }
+            50% { border-color: rgba(37, 99, 235, 0.2); }
+        }
+        .shimmer {
+            background: linear-gradient(90deg, #f2f3ff 25%, #eaedff 50%, #f2f3ff 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24 md:pb-0 md:pt-20 font-body-md">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-background flat no shadows flex items-center justify-between px-margin-mobile py-sm z-40 hidden md:flex">
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors rounded-full p-2 active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">Studdy AI</h1>
+</div>
+<div class="flex items-center gap-4">
+<!-- Desktop Nav Items -->
+<nav class="flex gap-6 mr-4">
+<a class="text-on-surface-variant dark:text-outline font-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">Home</a>
+<a class="text-primary dark:text-primary-fixed-dim font-label-md bg-surface-container-low px-3 py-2 rounded-lg" href="#">Practice</a>
+<a class="text-on-surface-variant dark:text-outline font-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">Simplify</a>
+</nav>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A small, stylized profile avatar of a student looking focused. Minimalist modern corporate style, flat soft colors, light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApiNFrSTt5wT7og88K-cbPtrbvSLbAeV3sM7HFigAuwBqm7uXlg9Bcb6xesKbMW9sBnM8NJQpHJC-kXH0YZPo506BBcx5NGHxkxOrT-nDg9kHIFZrGDNtHoRGIOVQMYPq9FU2rNMT8gV1thnMRtjyRDHYBFSRwNSN4mLwP0w42IRpQzLqK8GdQ3aW2KmwKudPdAiuVnmM863Z6K_43cfgjE8AV_Ns5vqnvZ-YX0aaj36cRjcCuX2KY">
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop py-xl">
+<!-- Loading State Overlay (Simulated via script toggle below) -->
+<div class="mb-xl flex flex-col items-center justify-center p-lg bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] border border-outline-variant loading-pulse hidden" id="loadingState">
+<span class="material-symbols-outlined text-primary text-display animate-spin mb-4" data-icon="sync">sync</span>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2 text-center">Reading your notes and creating practice questions…</h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-center max-w-md">This usually takes a few seconds. We're analyzing your recent biology lecture notes.</p>
+<div class="w-full max-w-md mt-6 space-y-4">
+<div class="h-16 w-full rounded-lg shimmer"></div>
+<div class="h-16 w-full rounded-lg shimmer"></div>
+<div class="h-16 w-full rounded-lg shimmer"></div>
+</div>
+</div>
+<!-- Results State (Hidden initially) -->
+<div class="space-y-lg" id="resultsState">
+<div class="flex items-center justify-between mb-md">
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">Biology 101 Practice</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">10 questions based on your latest notes</p>
+</div>
+<div class="bg-primary-container text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+                    Ready
+                </div>
+</div>
+<!-- Bento Grid of Questions -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Q1: Multiple Choice -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex flex-col">
+<div class="flex items-center gap-2 mb-4">
+<span class="bg-surface-container text-primary font-label-sm text-label-sm w-6 h-6 rounded-full flex items-center justify-center">1</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wide">Multiple Choice</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-surface mb-4">What is photosynthesis?</h3>
+<div class="space-y-2 mt-auto">
+<button class="w-full text-left p-3 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors font-body-md text-body-md flex items-center justify-between group">
+                            The process by which plants make food
+                            <span class="material-symbols-outlined text-outline-variant group-hover:text-primary" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+<button class="w-full text-left p-3 rounded-lg border border-error bg-error-container text-on-error-container font-body-md text-body-md flex items-center justify-between">
+                            A type of camera lens
+                            <span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<button class="w-full text-left p-3 rounded-lg border border-primary bg-primary-container text-on-primary font-body-md text-body-md flex items-center justify-between">
+                            The process by which plants make food
+                            <span class="material-symbols-outlined" data-icon="check_circle" data-weight="fill">check_circle</span>
+</button>
+</div>
+</div>
+<!-- Q2: True/False -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex flex-col">
+<div class="flex items-center gap-2 mb-4">
+<span class="bg-surface-container text-primary font-label-sm text-label-sm w-6 h-6 rounded-full flex items-center justify-center">2</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wide">True / False</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-surface mb-4">Mitochondria is the powerhouse of the cell.</h3>
+<div class="flex gap-4 mt-auto">
+<button class="flex-1 p-3 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors font-body-md text-body-md text-center">
+                            True
+                        </button>
+<button class="flex-1 p-3 rounded-lg border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors font-body-md text-body-md text-center">
+                            False
+                        </button>
+</div>
+</div>
+<!-- Q3: Fill in the blank -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex flex-col md:col-span-2">
+<div class="flex items-center gap-2 mb-4">
+<span class="bg-surface-container text-primary font-label-sm text-label-sm w-6 h-6 rounded-full flex items-center justify-center">3</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wide">Fill in the blank</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-surface mb-4">The process of cellular respiration mainly occurs in the <input class="border-b-2 border-primary bg-surface-container-low mx-2 w-32 px-2 py-1 focus:outline-none focus:ring-0 text-center rounded-t-md" placeholder="___" type="text">.</h3>
+<div class="flex justify-end mt-4">
+<button class="bg-surface-container-highest text-primary font-label-md px-4 py-2 rounded-lg hover:bg-surface-dim transition-colors">Check Answer</button>
+</div>
+</div>
+<!-- Q4: Short Answer -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-[0px_4px_20px_rgba(0,0,0,0.04)] flex flex-col md:col-span-2">
+<div class="flex items-center gap-2 mb-4">
+<span class="bg-surface-container text-primary font-label-sm text-label-sm w-6 h-6 rounded-full flex items-center justify-center">4</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wide">Short Answer</span>
+</div>
+<h3 class="font-body-lg text-body-lg text-on-surface mb-4">Explain the basic function of DNA in living organisms.</h3>
+<textarea class="w-full bg-surface-container-low border-2 border-transparent focus:border-primary rounded-lg p-3 font-body-md text-on-surface resize-none h-24" placeholder="Type your answer here..."></textarea>
+<div class="flex justify-between items-center mt-4">
+<span class="text-on-surface-variant font-label-sm text-label-sm">AI will review your answer</span>
+<button class="bg-primary text-on-primary font-label-md px-6 py-2 rounded-lg hover:bg-primary-fixed-variant transition-colors shadow-sm hover:shadow-md">Submit Answer</button>
+</div>
+</div>
+</div>
+<div class="flex justify-center pt-lg">
+<button class="bg-surface-container text-primary font-label-md px-6 py-3 rounded-full hover:bg-surface-dim transition-colors flex items-center gap-2">
+                    Show Remaining Questions
+                    <span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-xs bg-surface dark:bg-inverse-surface shadow-[0px_-4px_20px_rgba(0,0,0,0.04)] z-50 md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-xl px-4 py-2 active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="quiz" data-weight="fill">quiz</span>
+<span class="font-label-sm text-label-sm">Practice</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="auto_stories">auto_stories</span>
+<span class="font-label-sm text-label-sm">Simplify</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Simulate loading state transition
+        setTimeout(() => {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('resultsState').classList.remove('hidden');
+        }, 2500);
+    </script>
+
+
+
+
+</body></html>

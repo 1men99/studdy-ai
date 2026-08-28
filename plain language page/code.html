@@ -1,0 +1,213 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Plain Language Tool - Studdy AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#525657",
+                        "secondary-container": "#d0e1fb",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-primary-fixed": "#00174b",
+                        "outline-variant": "#c3c6d7",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#54647a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "inverse-surface": "#283044",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-tertiary-container": "#eff1f3",
+                        "surface-tint": "#0053db",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "tertiary-container": "#6b6e70",
+                        "on-background": "#131b2e",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-surface": "#131b2e",
+                        "surface": "#faf8ff",
+                        "surface-variant": "#dae2fd",
+                        "on-surface-variant": "#434655",
+                        "inverse-on-surface": "#eef0ff",
+                        "primary-container": "#2563eb",
+                        "surface-container": "#eaedff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "secondary": "#505f76",
+                        "surface-container-low": "#f2f3ff",
+                        "outline": "#737686",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-primary-container": "#eeefff",
+                        "primary-fixed": "#dbe1ff",
+                        "primary": "#004ac6",
+                        "inverse-primary": "#b4c5ff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container-highest": "#dae2fd",
+                        "error": "#ba1a1a",
+                        "background": "#faf8ff",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d2d9f4",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#003ea8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "1.25rem",
+                        "gutter": "1rem",
+                        "xs": "0.5rem",
+                        "sm": "1rem",
+                        "xl": "3rem",
+                        "unit": "4px",
+                        "md": "1.5rem",
+                        "lg": "2rem",
+                        "margin-desktop": "2.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface dark:bg-background text-on-surface pb-24 min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-background w-full top-0 sticky flex items-center justify-between px-margin-mobile py-sm z-40 transition-colors">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors active:opacity-80">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-outline" data-icon="menu">menu</span>
+</button>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">Studdy AI</h1>
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors active:opacity-80">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A small, circular avatar portrait of an enthusiastic student with glasses, smiling brightly in a well-lit library setting. The image should be highly detailed, realistic, and exude a warm, positive academic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6HDRqIPKCwFWKtSKnDbrBOfKv2crsI4OFoZcWPHeGtjWhA7D4svMLz-BCvZB9dLJen9980KuMN5rvrMosW20BSzjJWMPnxnwMy7TXQYNfS-H1T6HJuQo8YxPGMNqCyrK9hYcankOsbcABhRZtFvS9YF0LTVhhJvC__Z-EtZ0ro883FTMJCaoYFTT5x_3tySrmwfLntVmcaN_a0Uk2KXGSHt18tbZY5KKAhEPTtWwNkp64YSaqlVvO">
+</div>
+</button>
+</header>
+<main class="px-margin-mobile md:px-margin-desktop py-md max-w-5xl mx-auto space-y-lg">
+<section class="space-y-sm">
+<h2 class="font-headline-md text-headline-md">Simplify Complex Text</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Paste jargon, contracts, or textbook excerpts to get a plain language explanation.</p>
+</section>
+<!-- Input Area -->
+<section class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] p-md border border-[#F1F5F9] dark:bg-surface-container dark:border-outline-variant space-y-md">
+<div class="flex flex-col space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant sr-only" for="text-input">Enter Text</label>
+<textarea class="w-full p-4 rounded-lg bg-surface border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-y font-body-md text-body-md text-on-surface placeholder-on-surface-variant/50 transition-colors dark:bg-inverse-surface dark:text-on-secondary dark:placeholder-on-surface-variant" id="text-input" placeholder="Paste your text here... (e.g., 'The party of the first part hereby covenants and agrees...')" rows="6"></textarea>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg flex items-center space-x-2 hover:bg-primary-fixed-variant transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="">Simplify Text</span>
+</button>
+</div>
+</section>
+<!-- Results Section (Initially Empty State styled) -->
+<section class="bg-surface-container-low rounded-xl p-md border border-[#F1F5F9] dark:bg-surface-container-high dark:border-outline-variant min-h-[200px] flex flex-col justify-center items-center text-center space-y-4">
+<div class="w-16 h-16 rounded-full bg-surface-variant flex items-center justify-center text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined text-4xl" data-icon="lightbulb">lightbulb</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Your simplified explanation will appear here.</p>
+</section>
+<!-- Watch Out For Section -->
+<section class="space-y-sm pt-sm">
+<h3 class="font-headline-md text-headline-md flex items-center space-x-2">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<span class="">Watch Out For</span>
+</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-sm">
+<!-- Fee Card -->
+<div class="bg-error-container/20 rounded-xl p-sm border border-error-container flex items-start space-x-3 hover:shadow-md transition-shadow">
+<div class="p-2 bg-error-container rounded-full text-on-error-container shrink-0">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Hidden Fees</h4>
+<p class="font-body-sm text-[14px] text-on-surface-variant mt-1">Look for recurring charges or penalties.</p>
+</div>
+</div>
+<!-- Deadline Card -->
+<div class="bg-secondary-container/20 rounded-xl p-sm border border-secondary-container flex items-start space-x-3 hover:shadow-md transition-shadow">
+<div class="p-2 bg-secondary-container rounded-full text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined" data-icon="event_busy">event_busy</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Deadlines</h4>
+<p class="font-body-sm text-[14px] text-on-surface-variant mt-1">Check for strict notice periods or expiry dates.</p>
+</div>
+</div>
+<!-- Penalty Card -->
+<div class="bg-tertiary-container/20 rounded-xl p-sm border border-tertiary-container flex items-start space-x-3 hover:shadow-md transition-shadow">
+<div class="p-2 bg-tertiary-container rounded-full text-on-tertiary-container shrink-0">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Penalties</h4>
+<p class="font-body-sm text-[14px] text-on-surface-variant mt-1">Identify consequences for breach of terms.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden bg-surface dark:bg-inverse-surface fixed bottom-0 w-full z-50 shadow-[0px_-4px_20px_rgba(0,0,0,0.04)] fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-xs">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</a>
+<!-- Practice -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="quiz">quiz</span>
+<span class="font-label-sm text-label-sm mt-1">Practice</span>
+</a>
+<!-- Simplify (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-xl px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+<span class="font-label-sm text-label-sm mt-1">Simplify</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</a>
+</nav>
+
+
+
+
+</body></html>

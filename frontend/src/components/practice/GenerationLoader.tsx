@@ -1,0 +1,1 @@
+export function GenerationLoader() { return <div className="generation-loader" role="status"><span className="loader-orbit" /><div><strong>Building your practice set</strong><p>Analyzing notes, crafting questions, and checking answers...</p></div></div> }

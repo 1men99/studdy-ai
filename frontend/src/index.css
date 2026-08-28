@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: oklch(1.0000 0 0);
+    --foreground: oklch(0.3211 0 0);
+    --card: oklch(1.0000 0 0);
+    --card-foreground: oklch(0.3211 0 0);
+    --popover: oklch(1.0000 0 0);
+    --popover-foreground: oklch(0.3211 0 0);
+    --primary: oklch(0.6225 0.2041 259.9027);
+    --primary-foreground: oklch(1.0000 0 0);
+    --secondary: oklch(0.9665 0.0045 258.3247);
+    --secondary-foreground: oklch(0.4419 0.0375 257.2811);
+    --muted: oklch(0.9846 0.0017 247.8389);
+    --muted-foreground: oklch(0.5471 0.0321 263.2921);
+    --accent: oklch(0.9510 0.0267 237.5723);
+    --accent-foreground: oklch(0.3742 0.1844 263.9420);
+    --destructive: oklch(0.6496 0.2362 26.9032);
+    --destructive-foreground: oklch(1.0000 0 0);
+    --border: oklch(0.9271 0.0075 260.7315);
+    --input: oklch(0.9271 0.0075 260.7315);
+    --ring: oklch(0.6225 0.2041 259.9027);
+    --chart-1: oklch(0.6225 0.2041 259.9027);
+    --chart-2: oklch(0.5469 0.2507 262.8085);
+    --chart-3: oklch(0.4902 0.2693 263.7106);
+    --chart-4: oklch(0.4234 0.2370 263.9162);
+    --chart-5: oklch(0.3742 0.1844 263.9420);
+    --radius: 1.15rem;
+    --sidebar: oklch(0.9846 0.0017 247.8389);
+    --sidebar-foreground: oklch(0.3211 0 0);
+    --sidebar-primary: oklch(0.6225 0.2041 259.9027);
+    --sidebar-primary-foreground: oklch(1.0000 0 0);
+    --sidebar-accent: oklch(0.9510 0.0267 237.5723);
+    --sidebar-accent-foreground: oklch(0.3742 0.1844 263.9420);
+    --sidebar-border: oklch(0.9271 0.0075 260.7315);
+    --sidebar-ring: oklch(0.6225 0.2041 259.9027);
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Source Serif 4', serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --tracking-normal: 0em;
+  }
+
+  .dark {
+    --background: oklch(0.2046 0 0);
+    --foreground: oklch(0.9219 0 0);
+    --card: oklch(0.2686 0 0);
+    --card-foreground: oklch(0.9219 0 0);
+    --popover: oklch(0.2686 0 0);
+    --popover-foreground: oklch(0.9219 0 0);
+    --primary: oklch(0.6225 0.2041 259.9027);
+    --primary-foreground: oklch(1.0000 0 0);
+    --secondary: oklch(0.2686 0 0);
+    --secondary-foreground: oklch(0.9219 0 0);
+    --muted: oklch(0.2393 0 0);
+    --muted-foreground: oklch(0.7155 0 0);
+    --accent: oklch(0.5802 0.1915 259.7416);
+    --accent-foreground: oklch(0.8820 0.0588 253.9688);
+    --destructive: oklch(0.6496 0.2362 26.9032);
+    --destructive-foreground: oklch(1.0000 0 0);
+    --border: oklch(0.3715 0 0);
+    --input: oklch(0.3715 0 0);
+    --ring: oklch(0.6225 0.2041 259.9027);
+    --chart-1: oklch(0.7122 0.1526 254.9868);
+    --chart-2: oklch(0.6225 0.2041 259.9027);
+    --chart-3: oklch(0.5739 0.2334 262.7735);
+    --chart-4: oklch(0.6225 0.2041 259.9027);
+    --chart-5: oklch(0.6225 0.2041 259.9027);
+    --radius: 1.15rem;
+    --sidebar: oklch(0.2046 0 0);
+    --sidebar-foreground: oklch(0.9219 0 0);
+    --sidebar-primary: oklch(0.6225 0.2041 259.9027);
+    --sidebar-primary-foreground: oklch(1.0000 0 0);
+    --sidebar-accent: oklch(0.6225 0.2041 259.9027);
+    --sidebar-accent-foreground: oklch(0.8820 0.0588 253.9688);
+    --sidebar-border: oklch(0.3715 0 0);
+    --sidebar-ring: oklch(0.6225 0.2041 259.9027);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary-container ring-offset-2 ring-offset-surface;
+  }
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+    letter-spacing: var(--tracking-normal);
+  }
+  button, a {
+    @apply touch-manipulation;
+  }
+}
+
+/* Accessibility Skip Link */
+.skip-link {
+  @apply sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-container focus:text-white focus:rounded-lg focus:shadow-lg focus:font-semibold;
+}
+

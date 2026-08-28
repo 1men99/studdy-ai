@@ -1,0 +1,277 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Practice Questions - Studdy AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#525657",
+                        "secondary-container": "#d0e1fb",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-primary-fixed": "#00174b",
+                        "outline-variant": "#c3c6d7",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#54647a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "inverse-surface": "#283044",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-tertiary-container": "#eff1f3",
+                        "surface-tint": "#0053db",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "tertiary-container": "#6b6e70",
+                        "on-background": "#131b2e",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-surface": "#131b2e",
+                        "surface": "#faf8ff",
+                        "surface-variant": "#dae2fd",
+                        "on-surface-variant": "#434655",
+                        "inverse-on-surface": "#eef0ff",
+                        "primary-container": "#2563eb",
+                        "surface-container": "#eaedff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "secondary": "#505f76",
+                        "surface-container-low": "#f2f3ff",
+                        "outline": "#737686",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-primary-container": "#eeefff",
+                        "primary-fixed": "#dbe1ff",
+                        "primary": "#004ac6",
+                        "inverse-primary": "#b4c5ff",
+                        "surface-container-high": "#e2e7ff",
+                        "surface-container-highest": "#dae2fd",
+                        "error": "#ba1a1a",
+                        "background": "#faf8ff",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d2d9f4",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#003ea8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "1.25rem",
+                        "gutter": "1rem",
+                        "xs": "0.5rem",
+                        "sm": "1rem",
+                        "xl": "3rem",
+                        "unit": "4px",
+                        "md": "1.5rem",
+                        "lg": "2rem",
+                        "margin-desktop": "2.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "display": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf8ff;
+            color: #131b2e;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-[80px]">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-background w-full top-0 sticky flex items-center justify-between px-margin-mobile py-sm z-40">
+<button class="p-2 -ml-2 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-outline">menu</span>
+</button>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile font-bold text-primary dark:text-primary-fixed-dim">Studdy AI</h1>
+<button class="w-8 h-8 rounded-full overflow-hidden hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors active:opacity-80 transition-opacity flex items-center justify-center bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-sm">person</span>
+</button>
+</header>
+<main class="px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto mt-6 flex flex-col gap-xl">
+<!-- Header Section -->
+<section class="flex flex-col gap-2">
+<h2 class="font-headline-md text-headline-md text-on-surface">Practice Generator</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Paste your class notes below to generate targeted practice questions.</p>
+</section>
+<!-- Input Area (Bento Card Style) -->
+<section class="bg-white rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.04)] p-6 border border-surface-container-high flex flex-col gap-4 relative overflow-hidden group hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] transition-shadow duration-300">
+<!-- Subtle gradient background element for high-end feel -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-primary-fixed to-transparent opacity-30 rounded-full blur-3xl -z-10 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none"></div>
+<div class="flex justify-between items-center w-full">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-2" for="notes-input">
+<span class="material-symbols-outlined text-[18px] text-primary">description</span>
+                    Source Material
+                </label>
+<div class="flex gap-2">
+<button class="bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant p-2 rounded-full transition-colors" title="Upload Document">
+<span class="material-symbols-outlined text-[18px]">upload_file</span>
+</button>
+</div>
+</div>
+<div class="relative w-full h-64">
+<textarea class="w-full h-full bg-surface-container-low border-2 border-transparent focus:border-primary focus:ring-0 rounded-xl p-4 font-body-md text-body-md text-on-surface resize-none transition-all placeholder:text-outline-variant" id="notes-input" placeholder="Paste your history lecture on the French Revolution, or your biology notes on mitosis..."></textarea>
+<!-- Character Count -->
+<div class="absolute bottom-4 right-4 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-surface-container-high flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span id="char-count" class="">0</span> / 10,000
+                </div>
+</div>
+<!-- Error State Example (Hidden by default, shown via JS for demo) -->
+<div class="hidden bg-error-container text-on-error-container p-3 rounded-lg flex items-start gap-3 mt-2 border border-[#f5b8b8]" id="error-message">
+<span class="material-symbols-outlined text-error mt-0.5">error</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-error">Input Required</span>
+<span class="font-body-md text-body-md text-[14px]">Please paste some text before continuing. We need material to base the questions on.</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-2">
+<span class="bg-primary-fixed text-primary-fixed-dim text-primary px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">settings</span> Advanced
+                    </span>
+</div>
+<button class="bg-primary-container text-on-primary hover:bg-primary hover:shadow-md active:scale-95 transition-all px-8 py-3 rounded-full font-label-md text-label-md flex items-center gap-2 min-h-[48px]" id="generate-btn">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    Generate 10 Questions
+                </button>
+</div>
+</section>
+<!-- Results Section (Empty State Initially) -->
+<section class="flex flex-col gap-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Generated Practice</h3>
+<div class="bg-surface-container-low border border-dashed border-outline-variant rounded-xl p-12 flex flex-col items-center justify-center text-center gap-4 min-h-[300px]" id="results-area">
+<div class="w-16 h-16 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface-variant opacity-50 mb-2">
+<span class="material-symbols-outlined text-3xl">quiz</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface font-semibold">Ready to test your knowledge?</h4>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+                    Paste your notes above and hit generate to create a custom quiz based on your material.
+                </p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-surface dark:bg-inverse-surface shadow-[0px_-4px_20px_rgba(0,0,0,0.04)] fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-xs z-50 md:hidden border-t-0">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-xl px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-sm text-label-sm mt-1">Practice</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-sm text-label-sm mt-1">Simplify</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-2 hover:text-primary dark:hover:text-primary-fixed-dim active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</button>
+</nav>
+<!-- Desktop Sidebar (Hidden on mobile) - Conceptual implementation to meet responsive criteria -->
+<aside class="hidden md:flex flex-col fixed left-0 top-[64px] h-[calc(100vh-64px)] w-[240px] bg-surface border-r border-surface-container-high py-6 px-4 gap-2 z-30">
+<button class="flex items-center gap-3 text-on-surface-variant px-4 py-3 rounded-lg hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</button>
+<!-- Active State for Desktop Sidebar -->
+<button class="flex items-center gap-3 bg-secondary-container text-on-secondary-container px-4 py-3 rounded-lg hover:bg-surface-container-high transition-colors font-medium">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-md text-label-md">Practice</span>
+</button>
+<button class="flex items-center gap-3 text-on-surface-variant px-4 py-3 rounded-lg hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-md text-label-md">Simplify</span>
+</button>
+</aside>
+<script>
+        // Simple Interaction Logic
+        const textarea = document.getElementById('notes-input');
+        const charCount = document.getElementById('char-count');
+        const generateBtn = document.getElementById('generate-btn');
+        const errorMessage = document.getElementById('error-message');
+
+        textarea.addEventListener('input', () => {
+            const currentLength = textarea.value.length;
+            charCount.textContent = currentLength.toLocaleString();
+            
+            // Hide error if user starts typing
+            if (currentLength > 0 && !errorMessage.classList.contains('hidden')) {
+                errorMessage.classList.add('hidden');
+                textarea.classList.remove('border-error');
+            }
+        });
+
+        generateBtn.addEventListener('click', () => {
+            if (textarea.value.trim().length === 0) {
+                // Show Error State
+                errorMessage.classList.remove('hidden');
+                textarea.classList.add('border-error');
+                textarea.focus();
+                
+                // Add a little shake animation (vanilla JS implementation)
+                textarea.parentElement.animate([
+                    { transform: 'translateX(0)' },
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' },
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(0)' }
+                ], { duration: 300, easing: 'ease-in-out' });
+            } else {
+                // Simulate Loading/Generation (In a real app, this would hit an API)
+                const originalText = generateBtn.innerHTML;
+                generateBtn.innerHTML = `<span class="material-symbols-outlined animate-spin">sync</span> Generating...`;
+                generateBtn.classList.add('opacity-80', 'cursor-not-allowed');
+                
+                setTimeout(() => {
+                    generateBtn.innerHTML = originalText;
+                    generateBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+                    // Normally here you'd populate the results area
+                    alert("Questions generated successfully! (Demo functionality)");
+                }, 1500);
+            }
+        });
+    </script>
+
+
+
+
+</body></html>
